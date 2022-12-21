@@ -1,4 +1,4 @@
-# Jace's Python Template
+# Python Project Template
 
 This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for a typical Python project following modern packaging conventions.
 
