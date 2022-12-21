@@ -10,6 +10,8 @@ This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for a
 ## Features
 
 * [x] [Poetry](https://poetry.eustace.io/) for dependency management
+* [x] Docker for development.
+* [x] Github actions for CI.
 
 
 ## Usage
