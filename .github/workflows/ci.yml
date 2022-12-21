@@ -63,20 +63,18 @@ jobs:
           docker tag $IMAGE_ID:$VERSION $IMAGE_ID:latest
           docker push $IMAGE_ID:latest
 
-  test_python_scripts:
-    name: Test Python Script
-    needs: [build_docker_image]
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository }}/python.template:latest
-      # options: --user vscode
-      credentials:
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+# For future use
+  # test_python_scripts:
+  #   name: Test Python Script
+  #   needs: [build_docker_image]
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: ghcr.io/${{ github.repository }}/python.template:latest
+  #     # options: --user vscode
+  #     credentials:
+  #       username: ${{ github.repository_owner }}
+  #       password: ${{ secrets.GITHUB_TOKEN }}
 
-    steps:
-      # - name: Checkout
-      #   uses: actions/checkout@v2
-
-      - name: Run Pytest
-        run: python -m pytest /home/python.template/tests/
+  #   steps:
+  #     - name: Run Pytest
+  #       run: python -m pytest /home/python.template/tests/
