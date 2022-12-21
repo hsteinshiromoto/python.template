@@ -61,7 +61,7 @@ RUN pyenv install $PYTHON_VERSION && pyenv global $PYTHON_VERSION
 # Copy Container Setup Scripts
 # ---
 COPY pyproject.toml /usr/local/pyproject.toml
-COPY poetry.lock /usr/local/poetry.lock 
+# COPY poetry.lock /usr/local/poetry.lock 
 
 # Get poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
