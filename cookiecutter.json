@@ -1,6 +1,7 @@
 {
     "full_name": "Your Name",
     "email": "you@yourdomain.com",
+    "repository_link": "https://repo.link.com",
     "default_branch": "main",
     "project_name": "Project Name",
     "project_slug": "Project Slug",
