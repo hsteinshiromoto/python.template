@@ -1,18 +1,18 @@
 [tool.poetry]
 
-name = "{{cookiecutter.project_name}}"
-version = "0.0"
+name = "{{cookiecutter.project_slug}}"
+version = "0.1.0"
 description = "{{cookiecutter.project_short_description}}"
 
-packages = [{ include = "{{cookiecutter.package_name}}" }]
+packages = [{ include = "{{cookiecutter.project_slug}}" }]
 
 license = "MIT"
 authors = ["{{cookiecutter.full_name}} <{{cookiecutter.email}}>"]
 
 readme = "README.md"
-homepage = "https://pypi.org/project/{{cookiecutter.project_name}}"
-documentation = "https://{{cookiecutter.project_name}}.readthedocs.io"
-repository = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.github_repo}}"
+homepage = "https://pypi.org/project/{{cookiecutter.project_slug}}"
+documentation = "https://{{cookiecutter.project_slug}}.readthedocs.io"
+repository = "https://{{cookiecutter.repository_link}}"
 
 keywords = [
 ]
@@ -23,16 +23,14 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: {{cookiecutter.python_major_version}}",
-    "Programming Language :: Python :: {{cookiecutter.python_major_version}}.{{cookiecutter.python_minor_version}}",
+    "Programming Language :: Python :: {{cookiecutter.python_major_version}}.{{cookiecutter.python_minor_version}}..{{cookiecutter.python_patch_version}}",
 ]
 
 [tool.poetry.dependencies]
 
-python = "^{{cookiecutter.python_major_version}}.{{cookiecutter.python_minor_version}}"
+python = "^{{cookiecutter.python_major_version}}.{{cookiecutter.python_minor_version}}.{{cookiecutter.python_minor_version}}.{{cookiecutter.python_patch_version}}"
 
 # TODO: Remove these and add your library's requirements
-click = "*"
-minilog = "*"
 
 [tool.poetry.dev-dependencies]
 
