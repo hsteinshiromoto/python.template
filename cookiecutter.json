@@ -4,8 +4,8 @@
     "repository_link": "https://repo.link.com",
     "default_branch": "main",
     "project_name": "Project Name",
-    "project_slug": "Project Slug",
-    "project_short_description": "Sample project generated from Jace's Python Template.",
+    "project_slug": "project_slug",
+    "project_short_description": "Sample project generated from Python Template",
     "python_major_version": 3,
     "python_minor_version": 11,
     "python_patch_version": 1
