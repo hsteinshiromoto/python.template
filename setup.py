@@ -18,9 +18,9 @@ docs_extras = [
 
 # This call to setup() does all the work
 setup(
-    name="datatoolkit",
-    version="0.2.5",
-    description="A collection of tools for visualization and data processing for exploratory data analysis.",
+    name="python.template",
+    version="0.1.0",
+    description="A cookiecutter template for Python projects",
     long_description=README,
     long_description_content_type="text/markdown",
     url="https://github.com/hsteinshiromoto/datatoolkit",
@@ -30,22 +30,9 @@ setup(
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.11.1",
     ],
-    packages=["datatoolkit"],
-    include_package_data=True,
-    install_requires=[
-        "seaborn",
-        "typeguard",
-        "statsmodels",
-        "bokeh",
-        "networkx",
-        "hyperopt",
-    ],
-    entry_points={
-        "console_scripts": [
-            "datatoolkit=datatoolkit.__main__:main",
-        ]
-    },
+    packages=["python.template"],
+    include_package_data=True,    
     extras_require={"docs": docs_extras},
 )
