@@ -1,212 +1,132 @@
-PROJECT := {{cookiecutter.project_name}}
-PACKAGE := {{cookiecutter.package_name}}
-MODULES := $(wildcard $(PACKAGE)/*.py)
+SHELL:=/bin/bash
+.DEFAULT_GOAL := help
+.PHONY: help docs
 
-# MAIN TASKS ##################################################################
+# ---
+# Variables
+# ---
+include .env
+export $(shell sed 's/=.*//' .env)
 
-.PHONY: all
-all: install
+PROJECT_PATH := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+GIT_REMOTE=$(shell basename $(shell git remote get-url origin))
+PROJECT_NAME=$(shell echo $(GIT_REMOTE:.git=))
+CURRENT_VERSION=$(shell git tag -l --sort=-creatordate | head -n 1 | cut -d "v" -f2-)
 
-.PHONY: ci
-ci: format check test mkdocs ## Run all tasks that determine CI status
+DOCKER_REPOSITORY=ghcr.io
+DOCKER_IMAGE_NAME=${DOCKER_REPOSITORY}/${DOCKER_REPOSITORY_USER}/${PROJECT_NAME}
+DOCKER_TAG=$(shell git ls-files -s Dockerfile | awk '{print $$2}' | cut -c1-16)
+DOCKER_PARENT_IMAGE=debian:latest
 
-.PHONY: dev
-dev: install .clean-test ## Continuously run all CI tasks when files chanage
-	poetry run sniffer
+BUILD_DATE = $(shell date +%Y%m%d-%H:%M:%S)
+PYTHON_VERSION="{{ cookiecutter.python_major_version }}.{{ cookiecutter.python_minor_version }}.{{ cookiecutter.python_patch_version }}"
 
-.PHONY: run
-run: install ## Start the program
-	poetry run python $(PACKAGE)/__main__.py
+# ---
+# Sphix documentation settings
+# ---
+SPHINXOPTS    =
+SPHINXBUILD   = sphinx-build
+SPHINXPROJ    = datatoolkit
+SOURCEDIR     = docs/src
+BUILDDIR      = docs
 
-.PHONY: shell
-shell: install ## Launch an IPython session
-	poetry run ipython --ipython-dir=notebooks
+# ---
+# Commands
+# ---
 
-# SYSTEM DEPENDENCIES #########################################################
-
-.PHONY: doctor
-doctor:  ## Confirm system dependencies are available
-	bin/verchew
-
-# PROJECT DEPENDENCIES ########################################################
-
-VIRTUAL_ENV ?= .venv
-DEPENDENCIES := $(VIRTUAL_ENV)/.poetry-$(shell bin/checksum pyproject.toml poetry.lock)
-
-.PHONY: install
-install: $(DEPENDENCIES) .cache
-
-$(DEPENDENCIES): poetry.lock
-	@ rm -rf $(VIRTUAL_ENV)/.poetry-*
-	@ poetry config virtualenvs.in-project true
-	poetry install
-	@ touch $@
-
-ifndef CI
-poetry.lock: pyproject.toml
-	poetry lock --no-update
-	@ touch $@
-endif
-
-.cache:
-	@ mkdir -p .cache
-
-# CHECKS ######################################################################
-
-.PHONY: format
-format: install
-	poetry run isort $(PACKAGE) tests notebooks
-	poetry run black $(PACKAGE) tests notebooks
-	@ echo
-
-.PHONY: check
-check: install format  ## Run formaters, linters, and static analysis
-ifdef CI
-	git diff --exit-code
-endif
-	poetry run mypy $(PACKAGE) tests
-	poetry run pylint $(PACKAGE) tests --rcfile=.pylint.ini
-	poetry run pydocstyle $(PACKAGE) tests
-
-# TESTS #######################################################################
-
-RANDOM_SEED ?= $(shell date +%s)
-FAILURES := .cache/pytest/v/cache/lastfailed
-
-PYTEST_OPTIONS := --random --random-seed=$(RANDOM_SEED)
-ifndef DISABLE_COVERAGE
-PYTEST_OPTIONS += --cov=$(PACKAGE)
-endif
-ifdef CI
-PYTEST_OPTIONS += --cov-report=xml
-endif
-PYTEST_RERUN_OPTIONS := --last-failed --exitfirst
-
-.PHONY: test
-test: test-all ## Run unit and integration tests
-
-.PHONY: test-unit
-test-unit: install
-	@ ( mv $(FAILURES) $(FAILURES).bak || true ) > /dev/null 2>&1
-	poetry run pytest $(PACKAGE) $(PYTEST_OPTIONS)
-	@ ( mv $(FAILURES).bak $(FAILURES) || true ) > /dev/null 2>&1
-ifndef DISABLE_COVERAGE
-	poetry run coveragespace update unit
-endif
-
-.PHONY: test-int
-test-int: install
-	@ if test -e $(FAILURES); then poetry run pytest tests $(PYTEST_RERUN_OPTIONS); fi
-	@ rm -rf $(FAILURES)
-	poetry run pytest tests $(PYTEST_OPTIONS)
-ifndef DISABLE_COVERAGE
-	poetry run coveragespace update integration
-endif
-
-.PHONY: test-all
-test-all: install
-	@ if test -e $(FAILURES); then poetry run pytest $(PACKAGE) tests $(PYTEST_RERUN_OPTIONS); fi
-	@ rm -rf $(FAILURES)
-	poetry run pytest $(PACKAGE) tests $(PYTEST_OPTIONS)
-ifndef DISABLE_COVERAGE
-	poetry run coveragespace update overall
-endif
-
-.PHONY: read-coverage
-read-coverage:
-	bin/open htmlcov/index.html
-
-# DOCUMENTATION ###############################################################
-
-MKDOCS_INDEX := site/index.html
-
-.PHONY: docs
-docs: mkdocs uml ## Generate documentation and UML
-ifndef CI
-	@ eval "sleep 3; bin/open http://127.0.0.1:8000" &
-	poetry run mkdocs serve
-endif
-
-.PHONY: mkdocs
-mkdocs: install $(MKDOCS_INDEX)
-$(MKDOCS_INDEX): docs/requirements.txt mkdocs.yml docs/*.md
-	@ mkdir -p docs/about
-	@ cd docs && ln -sf ../README.md index.md
-	@ cd docs/about && ln -sf ../../CHANGELOG.md changelog.md
-	@ cd docs/about && ln -sf ../../CONTRIBUTING.md contributing.md
-	@ cd docs/about && ln -sf ../../LICENSE.md license.md
-	poetry run mkdocs build --clean --strict
-
-docs/requirements.txt: poetry.lock
-	@ poetry export --with dev --without-hashes | grep mkdocs > $@
-	@ poetry export --with dev --without-hashes | grep pygments >> $@
-	@ poetry export --with dev --without-hashes | grep jinja2 >> $@
-
-.PHONY: uml
-uml: install docs/*.png
-docs/*.png: $(MODULES)
-	poetry run pyreverse $(PACKAGE) -p $(PACKAGE) -a 1 -f ALL -o png --ignore tests
-	- mv -f classes_$(PACKAGE).png docs/classes.png
-	- mv -f packages_$(PACKAGE).png docs/packages.png
-
-# BUILD #######################################################################
-
-DIST_FILES := dist/*.tar.gz dist/*.whl
-EXE_FILES := dist/$(PACKAGE).*
-
-.PHONY: dist
-dist: install $(DIST_FILES)
-$(DIST_FILES): $(MODULES) pyproject.toml
-	rm -f $(DIST_FILES)
+## Build Python package
+build:
 	poetry build
 
-.PHONY: exe
-exe: install $(EXE_FILES)
-$(EXE_FILES): $(MODULES) $(PACKAGE).spec
-	# For framework/shared support: https://github.com/yyuu/pyenv/wiki
-	poetry run pyinstaller $(PACKAGE).spec --noconfirm --clean
+## Check package build
+check:
+	twine check dist/*
 
-$(PACKAGE).spec:
-	poetry run pyi-makespec $(PACKAGE)/__main__.py --onefile --windowed --name=$(PACKAGE)
+## Publish to PyPI
+publish: 
+	poetry publish --username __token__ --password $PYPI_API_TOKEN
 
-# RELEASE #####################################################################
+## Build Docker app image
+image:
+	$(eval DOCKER_IMAGE_TAG=${DOCKER_IMAGE_NAME}:${DOCKER_TAG})
 
-.PHONY: upload
-upload: dist ## Upload the current version to PyPI
-	git diff --name-only --exit-code
-	poetry publish
-	bin/open https://pypi.org/project/$(PROJECT)
+	@echo "Building docker image ${DOCKER_IMAGE_TAG}"
+	docker build --build-arg BUILD_DATE=${BUILD_DATE} \
+				--build-arg DOCKER_PARENT_IMAGE=${DOCKER_PARENT_IMAGE} \
+				--build-arg PROJECT_NAME=${PROJECT_NAME} \
+				--build-arg PYTHON_VERSION=${PYTHON_VERSION} \
+				-t ${DOCKER_IMAGE_TAG} .
+	@echo "Done"
 
-# CLEANUP #####################################################################
+## Sphinx documentation
+docs:
+	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	cp -r docs/html/* docs/ && rm -R docs/html
+	poetry export -f requirements.txt --output requirements.txt --without-hashes --with dev
 
-.PHONY: clean
-clean: .clean-build .clean-docs .clean-test .clean-install ## Delete all generated and temporary files
+## Pull latest image from repository
+pull:
+	$(eval DOCKER_IMAGE_TAG=${DOCKER_IMAGE_NAME}:${DOCKER_TAG})
 
-.PHONY: clean-all
-clean-all: clean
-	rm -rf $(VIRTUAL_ENV)
+	docker pull ${DOCKER_IMAGE_TAG}
 
-.PHONY: .clean-install
-.clean-install:
-	find $(PACKAGE) tests -name '__pycache__' -delete
-	rm -rf *.egg-info
-
-.PHONY: .clean-test
-.clean-test:
-	rm -rf .cache .pytest .coverage htmlcov
-
-.PHONY: .clean-docs
-.clean-docs:
-	rm -rf docs/*.png site
-
-.PHONY: .clean-build
-.clean-build:
-	rm -rf *.spec dist build
-
-# HELP ########################################################################
-
-.PHONY: help
-help: all
-	@ grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+# ---
+# Self Documenting Commands
+# ---
 
 .DEFAULT_GOAL := help
+
+# Inspired by <http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html>
+# sed script explained:
+# /^##/:
+# 	* save line in hold space
+# 	* purge line
+# 	* Loop:
+# 		* append newline + line to hold space
+# 		* go to next line
+# 		* if line starts with doc comment, strip comment character off and loop
+# 	* remove target prerequisites
+# 	* append hold space (+ newline) to line
+# 	* replace newline plus comments by `---`
+# 	* print line
+# Separate expressions are necessary because labels cannot be delimited by
+# semicolon; see <http://stackoverflow.com/a/11799865/1968>
+.PHONY: help
+help:
+	@echo "$$(tput bold)Available rules:$$(tput sgr0)"
+	@echo
+	@sed -n -e "/^## / { \
+		h; \
+		s/.*//; \
+		:doc" \
+		-e "H; \
+		n; \
+		s/^## //; \
+		t doc" \
+		-e "s/:.*//; \
+		G; \
+		s/\\n## /---/; \
+		s/\\n/ /g; \
+		p; \
+	}" ${MAKEFILE_LIST} \
+	| LC_ALL='C' sort --ignore-case \
+	| awk -F '---' \
+		-v ncol=$$(tput cols) \
+		-v indent=19 \
+		-v col_on="$$(tput setaf 6)" \
+		-v col_off="$$(tput sgr0)" \
+	'{ \
+		printf "%s%*s%s ", col_on, -indent, $$1, col_off; \
+		n = split($$2, words, " "); \
+		line_length = ncol - indent; \
+		for (i = 1; i <= n; i++) { \
+			line_length -= length(words[i]) + 1; \
+			if (line_length <= 0) { \
+				line_length = ncol - indent - length(words[i]) - 1; \
+				printf "\n%*s ", -indent, " "; \
+			} \
+			printf "%s ", words[i]; \
+		} \
+		printf "\n"; \
+	}' \
+	| more $(shell test $(shell uname) = Darwin && echo '--no-init --raw-control-chars')
