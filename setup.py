@@ -19,7 +19,7 @@ docs_extras = [
 # This call to setup() does all the work
 setup(
     name="python.template",
-    version="0.1.0",
+    version="0.1.5",
     description="A cookiecutter template for Python projects",
     long_description=README,
     long_description_content_type="text/markdown",
