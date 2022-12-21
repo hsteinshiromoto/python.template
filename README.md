@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/580578142.svg)](https://zenodo.org/badge/latestdoi/580578142)
 [![Build Status](https://github.com/hsteinshiromoto/python.template/actions/workflows/ci.yml/badge.svg)](https://github.com/hsteinshiromoto/python.template/actions/workflows/ci.yml)
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/hsteinshiromoto/python.template?style=flat)
 ![LICENSE](https://img.shields.io/badge/license-MIT-lightgrey.svg)
