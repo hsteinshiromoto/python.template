@@ -1,6 +1,6 @@
 # Overview
 
-{{cookiecutter.project_short_description}}
+{{cookiecutter.project_name}}
 
 This project was generated with [cookiecutter](https://github.com/audreyr/cookiecutter) using [jacebrowning/template-python](https://github.com/jacebrowning/template-python).
 
@@ -23,21 +23,14 @@ This project was generated with [cookiecutter](https://github.com/audreyr/cookie
 Install it directly into an activated virtual environment:
 
 ```text
-$ pip install {{cookiecutter.project_name}}
+$ pip install {{cookiecutter.slug}}
 ```
 
 or add it to your [Poetry](https://poetry.eustace.io/) project:
 
 ```text
-$ poetry add {{cookiecutter.project_name}}
+$ poetry add {{cookiecutter.slug}}
 ```
 
 ## Usage
 
-After installation, the package can imported:
-
-```text
-$ python
->>> import {{cookiecutter.package_name}}
->>> {{cookiecutter.package_name}}.__version__
-```
