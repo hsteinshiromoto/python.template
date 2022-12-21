@@ -29,6 +29,7 @@ classifiers = [
 [tool.poetry.dependencies]
 
 python = "^{{cookiecutter.python_major_version}}.{{cookiecutter.python_minor_version}}"
+python-dotenv = "*"
 
 # TODO: Remove these and add your library's requirements
 
