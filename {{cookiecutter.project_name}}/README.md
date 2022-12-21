@@ -15,13 +15,13 @@ This project was generated with [cookiecutter](https://github.com/audreyr/cookie
 Install it directly into an activated virtual environment:
 
 ```text
-$ pip install {{cookiecutter.slug}}
+$ pip install {{cookiecutter.project_slug}}
 ```
 
 or add it to your [Poetry](https://poetry.eustace.io/) project:
 
 ```text
-$ poetry add {{cookiecutter.slug}}
+$ poetry add {{cookiecutter.project_slug}}
 ```
 
 ## Usage
