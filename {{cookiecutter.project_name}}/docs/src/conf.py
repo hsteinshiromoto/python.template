@@ -20,12 +20,12 @@ sys.path.append(str(PROJECT_ROOT))
 
 # -- Project information -----------------------------------------------------
 
-project = "DataToolkit"
-copyright = "2021, Humberto STEIN SHIROMOTO"
-author = "Humberto STEIN SHIROMOTO"
+project = "{{ cookiecutter.project_name }}"
+copyright = "2021, {{ cookiecutter.full_name }}"
+author = "{{ cookiecutter.full_name }}"
 
 # The full version, including alpha/beta/rc tags
-release = "v0.2.5"
+release = "v0.1.0"
 
 
 # -- General configuration ---------------------------------------------------
