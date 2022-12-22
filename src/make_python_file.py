@@ -54,12 +54,19 @@ def make_directory_structure(file: dict, path: Path = get_project_root()):
 
 
 @log
-def main():
-    settings = get_config("machine_learning.json", get_project_root() / "conf")
+def main(repository_type: str):
 
-    make_directory_structure(settings, Path("/workspaces/tmp"))
+    try:
+        settings = get_config(f"{repository_type}.json", get_project_root() / "conf")
+
+    except IOError as e:
+        p = (get_project_root() / "conf").glob("*.json")
+        msg = f"Expected repository_type to be either {[x.stem for x in p if x.is_file()]}. Got {repository_type}"
+        raise ValueError(msg) from e
+
+    make_directory_structure(settings)
 
 
 if __name__ == "__main__":
     logger, _ = make_logger(__file__, get_project_root() / "logs")
-    main()
+    main("python")
