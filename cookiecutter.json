@@ -8,5 +8,7 @@
     "project_short_description": "Sample project generated from Python Template",
     "python_major_version": 3,
     "python_minor_version": 11,
-    "python_patch_version": 1
+    "python_patch_version": 1,
+    "docker_repository": "ghcr.io",
+    "docker_repository_user": "hsteinshiromoto"
 }
