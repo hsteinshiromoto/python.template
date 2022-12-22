@@ -54,7 +54,7 @@
                               "children": [
                                     {
                                           "type": "file",
-                                          "name": "make_dataset.py",
+                                          "name": "make_dataset.py"
                                     }
                               ]
                         },
@@ -64,11 +64,11 @@
                               "children": [
                                     {
                                           "type": "file",
-                                          "name": "build_features.py",
+                                          "name": "build_features.py"
                                     },
                                     {
                                           "type": "file",
-                                          "name": "transformers.py",
+                                          "name": "transformers.py"
                                     }
                               ]
                         },
@@ -78,15 +78,15 @@
                               "children": [
                                     {
                                           "type": "file",
-                                          "name": "train_model.py",
+                                          "name": "train_model.py"
                                     },
                                     {
                                           "type": "file",
-                                          "name": "test_model.py",
+                                          "name": "test_model.py"
                                     },
                                     {
                                           "type": "file",
-                                          "name": "predict_model.py",
+                                          "name": "predict_model.py"
                                     }
                               ]
                         },
@@ -96,7 +96,7 @@
                               "children": [
                                     {
                                           "type": "file",
-                                          "name": "visualize.py",
+                                          "name": "visualize.py"
                                     }
                               ]
                         }
