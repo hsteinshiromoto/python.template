@@ -70,6 +70,10 @@ pull:
 
 	docker pull ${DOCKER_IMAGE_TAG}
 
+## Creates repository structure
+structure:
+	python3 bin/make_repository_structure.py
+
 # ---
 # Self Documenting Commands
 # ---
