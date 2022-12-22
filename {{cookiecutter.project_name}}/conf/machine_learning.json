@@ -1,0 +1,116 @@
+{
+      "type": "directory",
+      "name": ".",
+      "children": [
+            {
+                  "type": "file",
+                  "name": "setup.py"
+            },
+            {
+                  "type": "directory",
+                  "name": "data",
+                  "children": [
+                        {
+                              "type": "directory",
+                              "name": "external"
+                        },
+                        {
+                              "type": "directory",
+                              "name": "interim"
+                        },
+                        {
+                              "type": "directory",
+                              "name": "meta"
+                        },
+                        {
+                              "type": "directory",
+                              "name": "processed"
+                        },
+                        {
+                              "type": "directory",
+                              "name": "raw"
+                        }
+                  ]
+            },
+            {
+                  "type": "directory",
+                  "name": "models"
+            },
+            {
+                  "type": "directory",
+                  "name": "references"
+            },
+            {
+                  "type": "directory",
+                  "name": "reports"
+            },
+            {
+                  "type": "directory",
+                  "name": "src",
+                  "children": [
+                        {
+                              "type": "directory",
+                              "name": "conf",
+                              "children": [
+                                    {
+                                          "type": "file",
+                                          "name": "settings.yaml"
+                                    }
+                              ]
+                        },
+                        {
+                              "type": "directory",
+                              "name": "data",
+                              "children": [
+                                    {
+                                          "type": "file",
+                                          "name": "make_dataset.py"
+                                    }
+                              ]
+                        },
+                        {
+                              "type": "directory",
+                              "name": "features",
+                              "children": [
+                                    {
+                                          "type": "file",
+                                          "name": "build_features.py"
+                                    },
+                                    {
+                                          "type": "file",
+                                          "name": "transformers.py"
+                                    }
+                              ]
+                        },
+                        {
+                              "type": "directory",
+                              "name": "models",
+                              "children": [
+                                    {
+                                          "type": "file",
+                                          "name": "train_model.py"
+                                    },
+                                    {
+                                          "type": "file",
+                                          "name": "test_model.py"
+                                    },
+                                    {
+                                          "type": "file",
+                                          "name": "predict_model.py"
+                                    }
+                              ]
+                        },
+                        {
+                              "type": "directory",
+                              "name": "visualization",
+                              "children": [
+                                    {
+                                          "type": "file",
+                                          "name": "visualize.py"
+                                    }
+                              ]
+                        }
+                  ]
+            }
+      ]
+}
