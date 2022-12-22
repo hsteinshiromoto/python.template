@@ -1,5 +1,5 @@
 [![Documentation Status](https://readthedocs.org/projects/{{cookiecutter.project_slug}}/badge/?version=latest)](https://{{cookiecutter.project_slug}}.readthedocs.io/?badge=latest)
-[![Build_and_test_code](https://github.com/hsteinshiromoto/{{cookiecutter.project_slug}}/actions/workflows/ci.yml/badge.svg)](https://github.com/hsteinshiromoto/{{cookiecutter.project_slug}}/actions/workflows/ci.yml)
+[![CI](https://github.com/hsteinshiromoto/{{cookiecutter.project_slug}}/actions/workflows/ci.yml/badge.svg)](https://github.com/hsteinshiromoto/{{cookiecutter.project_slug}}/actions/workflows/ci.yml)
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/hsteinshiromoto/{{cookiecutter.project_slug}}?style=flat)
 ![LICENSE](https://img.shields.io/badge/license-MIT-lightgrey.svg)
 
