@@ -1,14 +1,17 @@
 import contextlib
-from pathlib import Path
 import json
+from pathlib import Path
 
 import git
+from cartorio import make_logger, log
 
 
+@log
 def get_project_root() -> Path:
     return Path(git.Repo(".", search_parent_directories=True).working_tree_dir)
 
 
+@log
 def get_config(filename: str | Path, path: Path) -> dict:
     """Get configuration from YAML file.
 
@@ -26,6 +29,7 @@ def get_config(filename: str | Path, path: Path) -> dict:
     return config
 
 
+@log
 def make_directory_structure(file: dict, path: Path = get_project_root()):
     """Make directory structure from JSON file.
 
@@ -35,7 +39,7 @@ def make_directory_structure(file: dict, path: Path = get_project_root()):
     """
     if file["type"] == "directory":
         # Create the directory
-        print(f"Creating directory {path / file['name']}")
+        logger.info(f"Creating directory {path / file['name']}")
         (path / file["name"]).mkdir(parents=True, exist_ok=True)
 
         # Recursively process the children of the directory
@@ -44,11 +48,12 @@ def make_directory_structure(file: dict, path: Path = get_project_root()):
                 make_directory_structure(child, path / file["name"])
     else:
         # Create the file
-        print(f"Creating file {path / file['name']}")
+        logger.info(f"Creating file {path / file['name']}")
         with (path / file["name"]).open("w", encoding="utf-8") as f:
             f.write(" ")
 
 
+@log
 def main():
     settings = get_config("machine_learning.json", get_project_root() / "conf")
 
@@ -56,4 +61,5 @@ def main():
 
 
 if __name__ == "__main__":
+    logger, _ = make_logger(__file__, get_project_root() / "logs")
     main()
