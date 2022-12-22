@@ -3,6 +3,7 @@
 import contextlib
 import json
 from pathlib import Path
+import argparse
 
 import git
 from cartorio import make_logger, log
@@ -71,4 +72,11 @@ def main(repository_type: str):
 
 if __name__ == "__main__":
     logger, _ = make_logger(__file__, get_project_root() / "logs")
-    main("python")
+
+    args = argparse.ArgumentParser()
+    args.add_argument(
+        "-r", "--repository_type", type=str, help="Type of repository to create."
+    )
+    inputs = args.parse_args()
+
+    main(inputs.repository_type)

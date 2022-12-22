@@ -72,7 +72,8 @@ pull:
 
 ## Creates repository structure
 structure:
-	python3 bin/make_repository_structure.py
+	@echo "Creating repository structure for $(r)"
+	python3 bin/make_repository_structure.py -r=$(r)
 
 # ---
 # Self Documenting Commands
