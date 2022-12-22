@@ -50,6 +50,16 @@
                   "children": [
                         {
                               "type": "directory",
+                              "name": "conf",
+                              "children": [
+                                    {
+                                          "type": "file",
+                                          "name": "settings.yaml"
+                                    }
+                              ]
+                        },
+                        {
+                              "type": "directory",
                               "name": "data",
                               "children": [
                                     {
