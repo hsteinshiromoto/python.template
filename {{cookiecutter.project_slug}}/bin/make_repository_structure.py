@@ -11,7 +11,7 @@ from cartorio import make_logger, log
 
 @log
 def get_project_root() -> Path:
-    return Path(git.Repo(".", search_parent_directories=True).working_tree_dir)
+    return Path(git.Repo(".", search_parent_directories=True).working_tree_dir)  # type: ignore
 
 
 @log
