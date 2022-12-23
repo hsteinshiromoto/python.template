@@ -13,6 +13,7 @@ This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for a
 * [x] [Poetry](https://poetry.eustace.io/) for dependency management
 * [x] Docker for development.
 * [x] Github actions for CI.
+* [x] VSCode as IDE.
 
 
 ## Usage
