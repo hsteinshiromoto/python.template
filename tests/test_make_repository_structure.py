@@ -5,9 +5,9 @@ import pytest
 
 PROJECT_ROOT = Path(__file__).parents[1].resolve()
 
-sys.path.append(str(PROJECT_ROOT))
+sys.path.append(str(PROJECT_ROOT / "{{cookiecutter.project_slug}}"))
 
-mrs = __import__(r"{{cookiecutter.project_slug}}")
+import bin.make_repository_structure as mrs
 
 
 def test_error_on_invalid_repository_type():
