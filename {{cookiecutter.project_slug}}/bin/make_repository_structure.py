@@ -57,13 +57,15 @@ def make_directory_structure(file: dict, path: Path = get_project_root()):
 
 
 @log
-def main(repository_type: str):
+def main(repository_type: str, path: Path | str = ""):
+
+    path = Path(path) if path else get_project_root()
 
     try:
-        settings = get_config(f"{repository_type}.json", get_project_root() / "conf")
+        settings = get_config(f"{repository_type}.json", path / "conf")
 
     except IOError as e:
-        p = (get_project_root() / "conf").glob("*.json")
+        p = (path / "conf").glob("*.json")
         msg = f"Expected repository_type to be either {[x.stem for x in p if x.is_file()]}. Got {repository_type}"
         raise ValueError(msg) from e
 
@@ -75,8 +77,15 @@ if __name__ == "__main__":
 
     args = argparse.ArgumentParser()
     args.add_argument(
+        "-p",
+        "--path",
+        type=str,
+        default="",
+        help="Path to create the repository structure.",
+    )
+    args.add_argument(
         "-r", "--repository_type", type=str, help="Type of repository to create."
     )
     inputs = args.parse_args()
 
-    main(inputs.repository_type)
+    main(inputs.repository_type, inputs.path)
