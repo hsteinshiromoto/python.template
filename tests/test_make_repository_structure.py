@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+import contextlib
 
 import pytest
 
@@ -13,3 +14,30 @@ import bin.make_repository_structure as mrs
 def test_error_on_invalid_repository_type():
     with pytest.raises(ValueError):
         mrs.main("invalid_repository_type")
+
+
+def read_directory_structure(file: dict, path: Path):
+    """Make directory structure from JSON file.
+
+    Args:
+        file (dict): JSON file containing the directory structure to create.
+        path (Path, optional): Path where to create the directory. Defaults to get_project_root().
+    """
+    if file["type"] == "directory":
+        # test directory
+        (path / file["name"]).exists()
+
+        # Recursively process the children of the directory
+        with contextlib.suppress(KeyError):
+            for child in file["children"]:
+                read_directory_structure(child, path / file["name"])
+    else:
+        # Test file
+        (path / file["name"]).exists()
+
+
+@pytest.fixture(scope="session")
+def test_repository_structure_creation(tmp_path_factory):
+    mrs.main("git", tmp_path_factory("test/"))
+    settings = mrs.get_config("machine_learning.json", "conf")
+    read_directory_structure(settings, tmp_path_factory("test/"))
