@@ -3,17 +3,13 @@ import sys
 from pathlib import Path
 
 import pytest
+from cartorio import log, make_logger
 
 PROJECT_ROOT = Path(__file__).parents[1].resolve()
 
 sys.path.append(str(PROJECT_ROOT / "{{cookiecutter.project_slug}}"))
 
 import bin.make_repository_structure as mrs
-
-
-def test_error_on_invalid_repository_type():
-    with pytest.raises(ValueError):
-        mrs.main("invalid_repository_type")
 
 
 def read_directory_structure(file: dict, path: Path):
@@ -36,8 +32,16 @@ def read_directory_structure(file: dict, path: Path):
         (path / file["name"]).exists()
 
 
-@pytest.fixture(scope="session")
-def test_repository_structure_creation(tmp_path_factory):
-    mrs.main("git", tmp_path_factory("test/"))
-    settings = mrs.get_config("machine_learning.json", "conf")
-    read_directory_structure(settings, tmp_path_factory("test/"))
+def test_error_on_invalid_repository_type():
+    with pytest.raises(ValueError):
+        mrs.main("invalid_repository_type")
+
+
+# @pytest.fixture(scope="session")
+def test_repository_structure_creation(tmp_path):
+    path = tmp_path / "tests"
+    settings = mrs.get_config(
+        "machine_learning", PROJECT_ROOT / "{{cookiecutter.project_slug}}" / "conf"
+    )
+    mrs.main(settings, path)
+    read_directory_structure(settings, path)
