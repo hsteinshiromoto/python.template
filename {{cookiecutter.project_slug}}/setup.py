@@ -1,5 +1,4 @@
 import pathlib
-
 from setuptools import setup
 
 # The directory containing this file
@@ -19,19 +18,19 @@ docs_extras = [
 
 # This call to setup() does all the work
 setup(
-    name="python.template",
-    version="0.2.0",
-    description="A cookiecutter template for Python projects",
+    name="{{ cookiecutter.project_slug }}",
+    version="0.1.0",
+    description="{{ cookiecutter.project_short_description }}",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/hsteinshiromoto/python.template",
-    author="Humberto STEIN SHIROMOTO",
-    author_email="h.stein.shiromoto@gmail.com",
+    url="{{ cookiecutter.repository_link }}",
+    author="{{ cookiecutter.full_name }}",
+    author_email="{{ cookiecutter.email }}",
     license="MIT",
     classifiers=[
         "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.11.1",
+        "Programming Language :: Python :: {{cookiecutter.python_major_version}}",
+        "Programming Language :: Python :: {{cookiecutter.python_major_version}}.{{cookiecutter.python_minor_version}}",
     ],
     packages=["python.template"],
     include_package_data=True,

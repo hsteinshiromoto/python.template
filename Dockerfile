@@ -57,7 +57,7 @@ ENV PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"
 # ---
 RUN pyenv install $PYTHON_VERSION && pyenv global $PYTHON_VERSION
 
-RUN apt-get update && apt-get install vim gnupg2 make curl wget -y && apt-get clean
+RUN apt-get update && apt-get install vim gnupg2 make curl wget tree -y && apt-get clean
 
 # ---
 # Copy Container Setup Scripts

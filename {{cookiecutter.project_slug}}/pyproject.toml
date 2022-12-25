@@ -30,15 +30,19 @@ classifiers = [
 
 python = "^{{cookiecutter.python_major_version}}.{{cookiecutter.python_minor_version}}"
 python-dotenv = "*"
+cartorio = "*"
 
 # TODO: Remove these and add your library's requirements
 
 [tool.poetry.group.dev.dependencies]
+gitpython = "*"
+twine = "*"
 
 # Formatters
 black = "*"
 tomli = "*" # missing 'black' dependency
 isort = "*"
+rope = "*"
 
 # Linters
 
@@ -50,6 +54,9 @@ coveragespace = "*"
 
 # Documentation
 sphinx = "*"
+sphinx-rtd-theme = "*"
+myst-parser = "*"
+sphinxcontrib-napoleon = "*"
 
 # Tooling
 watermark = "*"

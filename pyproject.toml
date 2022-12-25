@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python.template"
-version = "0.1.5"
+version = "0.2.0"
 description = "A cookiecutter template for Python projects"
 authors = ["Humberto STEIN SHIROMOTO <h.stein.shiromoto@gmail.com>"]
 license = "MIT"
@@ -8,6 +8,8 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = ">=3.11.1,<4"
 cookiecutter = "^2.1.1"
+gitpython = "^3.1.29"
+cartorio = "^3.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -29,6 +31,9 @@ testpaths = [
 pythonpath = [
     ".", "{{ cookiecutter.repo_name }}"
 ]
+
+[tool.isort]
+profile = "black"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
