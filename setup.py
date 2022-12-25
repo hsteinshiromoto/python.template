@@ -1,4 +1,5 @@
 import pathlib
+
 from setuptools import setup
 
 # The directory containing this file
@@ -19,11 +20,11 @@ docs_extras = [
 # This call to setup() does all the work
 setup(
     name="python.template",
-    version="0.1.6",
+    version="0.2.0",
     description="A cookiecutter template for Python projects",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/hsteinshiromoto/datatoolkit",
+    url="https://github.com/hsteinshiromoto/python.template",
     author="Humberto STEIN SHIROMOTO",
     author_email="h.stein.shiromoto@gmail.com",
     license="MIT",
@@ -33,6 +34,6 @@ setup(
         "Programming Language :: Python :: 3.11.1",
     ],
     packages=["python.template"],
-    include_package_data=True,    
+    include_package_data=True,
     extras_require={"docs": docs_extras},
 )
