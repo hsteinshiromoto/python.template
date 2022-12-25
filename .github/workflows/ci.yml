@@ -76,5 +76,7 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
+      - uses: actions/checkout@v2
+
       - name: Run Pytest
-        run: python -m pytest /home/python.template/tests/
+        run: pytest
