@@ -33,7 +33,7 @@ def read_directory_structure(file: dict, path: Path):
 
 
 def test_error_on_invalid_repository_type():
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         mrs.main("invalid_repository_type")
 
 
