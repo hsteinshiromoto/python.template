@@ -17,6 +17,7 @@
 		"python.analysis.typeCheckingMode": "basic",
 		"python.formatting.provider": "black",
 		"python.linting.pylintEnabled": true,
-		"python.linting.enabled": true
+		"python.linting.enabled": true,
+		"esbonio.sphinx.confDir": ""
 	}
 }
