@@ -24,7 +24,7 @@ setup(
     description="A cookiecutter template for Python projects",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/hsteinshiromoto/datatoolkit",
+    url="https://github.com/hsteinshiromoto/python.template",
     author="Humberto STEIN SHIROMOTO",
     author_email="h.stein.shiromoto@gmail.com",
     license="MIT",
