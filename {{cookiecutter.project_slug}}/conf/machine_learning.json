@@ -3,10 +3,6 @@
       "name": ".",
       "children": [
             {
-                  "type": "file",
-                  "name": "setup.py"
-            },
-            {
                   "type": "directory",
                   "name": "data",
                   "children": [
