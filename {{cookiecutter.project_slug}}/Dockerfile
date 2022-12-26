@@ -45,7 +45,7 @@ WORKDIR $HOME
 RUN apt-get update && \
     apt-get install -y build-essential libssl-dev zlib1g-dev \
     libbz2-dev libreadline-dev libsqlite3-dev curl llvm \
-    libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev && \
+    libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev git && \
     apt-get clean
 
 RUN git clone --depth=1 https://github.com/pyenv/pyenv.git $HOME/.pyenv
@@ -58,15 +58,15 @@ ENV PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"
 RUN pyenv install $PYTHON_VERSION && pyenv global $PYTHON_VERSION
 
 # ---
-# Install Additional Debian packages
+# Uncomment this Section to Install Additional Debian Packages
 # ---
 
-COPY debian-requirements.txt /usr/local/debian-requirements.txt
+# COPY debian-requirements.txt /usr/local/debian-requirements.txt
 
-RUN apt-get update && \
-    DEBIAN_PACKAGES=$(egrep -v "^\s*(#|$)" /usr/local/debian-requirements.txt) && \
-    apt-get install -y $DEBIAN_PACKAGES && \
-    apt-get clean
+# RUN apt-get update && \
+#     DEBIAN_PACKAGES=$(egrep -v "^\s*(#|$)" /usr/local/debian-requirements.txt) && \
+#     apt-get install -y $DEBIAN_PACKAGES && \
+#     apt-get clean
 
 # ---
 # Copy Container Setup Scripts
