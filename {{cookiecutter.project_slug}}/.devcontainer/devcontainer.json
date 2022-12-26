@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.183.0/containers/docker-existing-dockerfile
 {
-    "image": "{{ cookiecutter.docker_repository }}/{{ cookiecutter.docker_repository_user }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}:latest",
+    "image": "ghcr.io/{{ cookiecutter.user_name }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}:latest",
     // Sets the run context to one level up instead of the .devcontainer folder.
     "context": "..",
     // "mounts": ["source=,target=,consistency=cached"],

@@ -12,7 +12,7 @@ authors = ["{{cookiecutter.full_name}} <{{cookiecutter.email}}>"]
 readme = "README.md"
 homepage = "https://pypi.org/project/{{cookiecutter.project_slug}}"
 documentation = "https://{{cookiecutter.project_slug}}.readthedocs.io"
-repository = "https://{{cookiecutter.repository_link}}"
+repository = "https://www.github.com/{{cookiecutter.user_name}}/{{cookiecutter.project_slug}}"
 
 keywords = [
 ]
