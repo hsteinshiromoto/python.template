@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 from cartorio import log, make_logger
+from git import Repo
 
 PROJECT_ROOT = Path(__file__).parents[1].resolve()
 
@@ -23,7 +24,10 @@ def test_get_repository_name():
 
 
 def test_main(tmp_path):
-    mc.main(git_branch_name="feature/template_ci", path=tmp_path)
+
+    local_repo = Repo(PROJECT_ROOT)
+    local_branch = local_repo.active_branch.name
+    mc.main(git_branch_name=local_branch, path=tmp_path)
 
     with open(str(tmp_path / "ci.yml"), mode="r", encoding="utf-8") as file:
         content = file.read()
