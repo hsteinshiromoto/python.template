@@ -81,8 +81,7 @@ structure:
 ci:
 	@echo "Getting CI files from template"
 	mkdir -p .github/workflows
-	cd .github/workflows && wget https://raw.githubusercontent.com/hsteinshiromoto/python.template/feature/cookiecutter_simple/files/ci.yml \
-	&& wget https://raw.githubusercontent.com/hsteinshiromoto/python.template/feature/cookiecutter_simple/files/new_release.yml
+	python3 bin/make_ci.py
 
 # ---
 # Self Documenting Commands
