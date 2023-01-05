@@ -76,6 +76,14 @@ structure:
 	@echo "Creating repository structure for $(r)"
 	python3 bin/make_repository_structure.py -r=$(r)
 
+
+## Get CI files from template
+ci:
+	@echo "Getting CI files from template"
+	mkdir -p .github/workflows
+	cd .github/workflows && wget https://raw.githubusercontent.com/hsteinshiromoto/python.template/feature/cookiecutter_simple/files/ci.yml \
+	&& wget https://raw.githubusercontent.com/hsteinshiromoto/python.template/feature/cookiecutter_simple/files/new_release.yml
+
 # ---
 # Self Documenting Commands
 # ---
