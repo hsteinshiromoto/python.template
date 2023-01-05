@@ -12,7 +12,7 @@ on:
 env:
   # TODO: Change variable to your image's name.
   IMAGE_NAME: { { project_slug } }
-{% raw %}
+
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
@@ -69,7 +69,7 @@ jobs:
     needs: [build_docker_image]
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ github.repository }}/{% endraw %}{{ project_slug }}{% raw %}:latest
+      image: ghcr.io/${{ github.repository }}/{{ project_slug }}:latest
       # options: --user vscode
       credentials:
         username: ${{ github.repository_owner }}
@@ -80,4 +80,3 @@ jobs:
 
       - name: Run Pytest
         run: pytest
-{% endraw %}
