@@ -1,14 +1,11 @@
 {
-    "full_name": "Your Name",
-    "email": "you@yourdomain.com",
-    "repository_link": "https://repo.link.com",
-    "default_branch": "main",
+    "full_name": "Humberto STEIN SHIROMOTO",
+    "email": "h.stein.shiromoto@gmail.com",
+    "user_name": "hsteinshiromoto",
     "project_name": "Project Name",
     "project_slug": "project_slug",
     "project_short_description": "Sample project generated from Python Template",
     "python_major_version": 3,
     "python_minor_version": 11,
-    "python_patch_version": 1,
-    "docker_repository": "ghcr.io",
-    "docker_repository_user": "hsteinshiromoto"
+    "python_patch_version": 1
 }
