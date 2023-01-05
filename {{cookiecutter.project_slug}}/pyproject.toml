@@ -35,6 +35,8 @@ cartorio = "*"
 [tool.poetry.group.dev.dependencies]
 gitpython = "*"
 twine = "*"
+Jinja2 = "*"
+wget = "*"
 
 # Formatters
 black = "*"
@@ -43,6 +45,7 @@ isort = "*"
 rope = "*"
 
 # Linters
+mypy = "*"
 
 # Testing
 pytest = "*"
@@ -60,11 +63,9 @@ sphinxcontrib-napoleon = "*"
 watermark = "*"
 
 [tool.black]
-
 quiet = true
 
 [tool.isort]
-
 profile = "black"
 
 [tool.pytest.ini_options]
