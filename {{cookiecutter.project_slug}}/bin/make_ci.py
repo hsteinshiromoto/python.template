@@ -6,7 +6,6 @@ from pathlib import Path
 
 import git
 from cartorio import log, make_logger
-from jinja2 import Environment, FileSystemLoader
 
 PROJECT_ROOT = Path(git.Repo(".", search_parent_directories=True).working_tree_dir)  # type: ignore
 
@@ -63,11 +62,12 @@ def main(
         get_file(base_url_map, path=path)
 
         if filename == "ci.yml":
-            environment = Environment(loader=FileSystemLoader(str(path)))
-            template = environment.get_template(filename)
-            content = template.render(project_slug=repository_name)
+            with open(str(path / filename), mode="r", encoding="utf-8") as file:
+                content = file.read()
 
-            with open(filename, mode="w", encoding="utf-8") as file:
+            content = content.replace("[[cookiecutter.project_slug]]", repository_name)
+
+            with open(str(path / filename), mode="w", encoding="utf-8") as file:
                 file.write(content)
 
 

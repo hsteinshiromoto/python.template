@@ -23,9 +23,9 @@ def test_get_repository_name():
 
 
 def test_main(tmp_path):
-    mc.main(git_branch_name="dev", path=tmp_path)
+    mc.main(git_branch_name="feature/template_ci", path=tmp_path)
 
     with open(str(tmp_path / "ci.yml"), mode="r", encoding="utf-8") as file:
         content = file.read()
         assert "python.template" in content
-        assert "{{ cookiecutter.project_slug }}" not in content
+        assert "[[cookiecutter.project_slug]]" not in content
