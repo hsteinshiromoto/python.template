@@ -76,8 +76,8 @@ if __name__ == "__main__":
 
     args = argparse.ArgumentParser()
     args.add_argument(
-        "-p",
-        "--project_slug",
+        "-b",
+        "--git_branch_name",
         type=str,
         default="",
         help="Project Slug.",
@@ -85,5 +85,4 @@ if __name__ == "__main__":
 
     inputs = args.parse_args()
 
-    settings = get_config(inputs.repository_type, inputs.path)
-    main(settings, inputs.path)
+    main(git_branch_name=inputs.git_branch_name)
