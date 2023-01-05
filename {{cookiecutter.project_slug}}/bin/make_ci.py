@@ -12,22 +12,23 @@ PROJECT_ROOT = Path(git.Repo(".", search_parent_directories=True).working_tree_d
 
 
 @log
-def get_file(url: str, path: Path = PROJECT_ROOT / ".github" / "workflows"):
+def get_file(url: str, path: Path):
     """Gets a file from a URL and saves it in a given path.
 
     Args:
         url (str): URL to download the file from.
-        path (Path, optional): Path to save the file to. Defaults to PROJECT_ROOT/".github"/"workflows".
+        path (Path, optional): Path to save the file to.
 
     Returns:
         None: Not used.
 
     Example:
-        >>> get_file("https://raw.githubusercontent.com/hsteinshiromoto/python.template/dev/files/ci.yml")
-        >>> (PROJECT_ROOT / ".github" / "workflows" / "ci.yml").exists()
+        >>> path = PROJECT_ROOT / ".github" / "workflows"
+        >>> get_file("https://raw.githubusercontent.com/hsteinshiromoto/python.template/dev/files/ci.yml", path=path)
+        >>> (path / "ci.yml").exists()
         True
     """
-    wget.download(url, out=path)
+    wget.download(url, out=str(path))
 
 
 def get_repository_name(path: Path = PROJECT_ROOT) -> str:
@@ -48,7 +49,9 @@ def get_repository_name(path: Path = PROJECT_ROOT) -> str:
 
 
 @log
-def main(git_branch_name: str = "main"):
+def main(
+    git_branch_name: str = "main", path: Path = PROJECT_ROOT / ".github" / "workflows"
+):
 
     # Get the repository name
 
@@ -57,12 +60,10 @@ def main(git_branch_name: str = "main"):
 
     for filename in files_list:
         base_url_map = f"https://raw.githubusercontent.com/hsteinshiromoto/python.template/{git_branch_name}/files/{filename}"
-        get_file(base_url_map)
+        get_file(base_url_map, path=path)
 
         if filename == "ci.yml":
-            environment = Environment(
-                loader=FileSystemLoader(str(PROJECT_ROOT / ".github" / "workflows"))
-            )
+            environment = Environment(loader=FileSystemLoader(str(path)))
             template = environment.get_template(filename)
             content = template.render(project_slug=repository_name)
 
