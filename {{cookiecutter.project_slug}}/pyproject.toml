@@ -69,17 +69,18 @@ profile = "black"
 
 [tool.pytest.ini_options]
 testpaths = [
-    "tests",
+    "tests", "{{ cookiecutter.project_slug }}"
 ]
 pythonpath = [
     ".", "{{ cookiecutter.project_slug }}"
 ]
 addopts = """
 --strict-markers
-
+--doctest-modules 
+--doctest-report
+ndiff
 -r sxX
 --show-capture=log
-
 --cov-report=html
 --cov-report=term-missing:skip-covered
 --no-cov-on-fail
