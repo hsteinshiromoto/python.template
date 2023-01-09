@@ -81,9 +81,6 @@ addopts = """
 ndiff
 -r sxX
 --show-capture=log
---cov-report=html
---cov-report=term-missing:skip-covered
---no-cov-on-fail
 """
 
 cache_dir = ".cache/pytest/"
