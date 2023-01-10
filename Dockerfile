@@ -13,6 +13,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Add vscode user to the container
 ARG PROJECT_NAME
 ARG PYTHON_VERSION
+
 # ---
 # Enviroment variables
 # ---

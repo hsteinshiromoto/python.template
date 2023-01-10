@@ -4,15 +4,13 @@ name = "{{cookiecutter.project_slug}}"
 version = "0.1.0"
 description = "{{cookiecutter.project_short_description}}"
 
-packages = [{ include = "{{cookiecutter.project_slug}}" }]
-
 license = "MIT"
 authors = ["{{cookiecutter.full_name}} <{{cookiecutter.email}}>"]
 
 readme = "README.md"
 homepage = "https://pypi.org/project/{{cookiecutter.project_slug}}"
 documentation = "https://{{cookiecutter.project_slug}}.readthedocs.io"
-repository = "https://{{cookiecutter.repository_link}}"
+repository = "https://www.github.com/{{cookiecutter.user_name}}/{{cookiecutter.project_slug}}"
 
 keywords = [
 ]
@@ -37,6 +35,7 @@ cartorio = "*"
 [tool.poetry.group.dev.dependencies]
 gitpython = "*"
 twine = "*"
+wget = "*"
 
 # Formatters
 black = "*"
@@ -45,6 +44,7 @@ isort = "*"
 rope = "*"
 
 # Linters
+mypy = "*"
 
 # Testing
 pytest = "*"
@@ -62,29 +62,25 @@ sphinxcontrib-napoleon = "*"
 watermark = "*"
 
 [tool.black]
-
 quiet = true
 
 [tool.isort]
-
 profile = "black"
 
 [tool.pytest.ini_options]
 testpaths = [
-    "tests",
+    "tests", "{{ cookiecutter.project_slug }}"
 ]
 pythonpath = [
     ".", "{{ cookiecutter.project_slug }}"
 ]
 addopts = """
 --strict-markers
-
+--doctest-modules 
+--doctest-report
+ndiff
 -r sxX
 --show-capture=log
-
---cov-report=html
---cov-report=term-missing:skip-covered
---no-cov-on-fail
 """
 
 cache_dir = ".cache/pytest/"
