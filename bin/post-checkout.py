@@ -21,6 +21,7 @@ def get_files(path: Path = PROJECT_ROOT) -> list[Path]:
         path / "CITATION.cff",
         path / "pyproject.toml",
         path / "setup.py",
+        path / "docs" / "src" / "conf.py",
     ]
 
 
