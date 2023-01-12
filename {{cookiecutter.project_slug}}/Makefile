@@ -26,7 +26,7 @@ PYTHON_VERSION="{{ cookiecutter.python_major_version }}.{{ cookiecutter.python_m
 # ---
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
-SPHINXPROJ    = datatoolkit
+SPHINXPROJ    = {{ cookiecutter.project_slug }}
 SOURCEDIR     = docs/src
 BUILDDIR      = docs
 
