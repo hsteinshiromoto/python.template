@@ -5,6 +5,6 @@ authors:
     given-names: Humberto
     orcid: https://orcid.org/0000-0002-0883-0231
 title: "A cookiecutter template for Python projects"
-version: 0.2.3
+version: 0.2.4
 doi: https://zenodo.org/badge/latestdoi/580578142
-date-released: 2022-12-26
+date-released: 2023-01-12
