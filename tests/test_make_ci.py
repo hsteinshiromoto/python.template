@@ -14,7 +14,7 @@ import bin.make_ci as mc
 
 def test_get_file(tmp_path):
     for file in ["ci.yml", "new_release.yml"]:
-        url = f"https://raw.githubusercontent.com/hsteinshiromoto/python.template/dev/files/{file}"
+        url = f"https://raw.githubusercontent.com/hsteinshiromoto/template.py/dev/files/{file}"
         mc.get_file(url, path=tmp_path)
         assert (tmp_path / file).exists()
 
@@ -31,5 +31,5 @@ def test_main(tmp_path):
 
     with open(str(tmp_path / "ci.yml"), mode="r", encoding="utf-8") as file:
         content = file.read()
-        assert "python.template" in content
+        assert "template.py" in content
         assert "[[cookiecutter.project_slug]]" not in content
