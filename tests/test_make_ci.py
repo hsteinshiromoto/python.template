@@ -20,7 +20,7 @@ def test_get_file(tmp_path):
 
 
 def test_get_repository_name():
-    assert mc.get_repository_name() == "python.template"
+    assert mc.get_repository_name() == "template.py"
 
 
 def test_main(tmp_path):
