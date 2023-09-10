@@ -23,7 +23,7 @@ PYTHON_VERSION="3.11.1"
 # ---
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
-SPHINXPROJ    = python.template
+SPHINXPROJ    = template.py
 SOURCEDIR     = docs/src
 BUILDDIR      = docs
 

@@ -32,7 +32,7 @@ setup(
         "Programming Language :: Python :: {{cookiecutter.python_major_version}}",
         "Programming Language :: Python :: {{cookiecutter.python_major_version}}.{{cookiecutter.python_minor_version}}",
     ],
-    packages=["python.template"],
+    packages=["template.py"],
     include_package_data=True,
     extras_require={"docs": docs_extras},
 )

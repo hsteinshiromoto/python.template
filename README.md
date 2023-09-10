@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/580578142.svg)](https://zenodo.org/badge/latestdoi/580578142)
-[![Build Status](https://github.com/hsteinshiromoto/python.template/actions/workflows/ci.yml/badge.svg)](https://github.com/hsteinshiromoto/python.template/actions/workflows/ci.yml)
-![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/hsteinshiromoto/python.template?style=flat)
+[![Build Status](https://github.com/hsteinshiromoto/template.py/actions/workflows/ci.yml/badge.svg)](https://github.com/hsteinshiromoto/template.py/actions/workflows/ci.yml)
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/hsteinshiromoto/template.py?style=flat)
 ![LICENSE](https://img.shields.io/badge/license-MIT-lightgrey.svg)
 
 
@@ -34,7 +34,7 @@ $ pip install cookiecutter
 and generate a project:
 
 ```bash
-$ cookiecutter gh:hsteinshiromoto/python.template -f
+$ cookiecutter gh:hsteinshiromoto/template.py -f
 ```
 
 Cookiecutter will ask you for some basic info (your name, project name, python package name, etc.) and generate a base Python project for you.

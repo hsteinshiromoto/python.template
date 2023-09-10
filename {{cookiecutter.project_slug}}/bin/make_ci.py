@@ -23,7 +23,7 @@ def get_file(url: str, path: Path):
 
     Example:
         >>> path = PROJECT_ROOT / ".github" / "workflows"
-        >>> get_file("https://raw.githubusercontent.com/hsteinshiromoto/python.template/dev/files/ci.yml", path=path)
+        >>> get_file("https://raw.githubusercontent.com/hsteinshiromoto/template.py/dev/files/ci.yml", path=path)
         >>> (path / "ci.yml").exists()
         True
     """
@@ -41,7 +41,7 @@ def get_repository_name(path: Path = PROJECT_ROOT) -> str:
 
     Example:
         >>> get_repository_name(PROJECT_ROOT)
-        'python.template'
+        'template.py'
     """
     repo = git.Repo(path)
     return repo.remotes.origin.url.split(".git")[0].split("/")[-1]
@@ -58,7 +58,7 @@ def main(
     repository_name = get_repository_name()
 
     for filename in files_list:
-        base_url_map = f"https://raw.githubusercontent.com/hsteinshiromoto/python.template/{git_branch_name}/files/{filename}"
+        base_url_map = f"https://raw.githubusercontent.com/hsteinshiromoto/template.py/{git_branch_name}/files/{filename}"
         get_file(base_url_map, path=path)
 
         if filename == "ci.yml":
