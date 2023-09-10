@@ -23,7 +23,7 @@ setup(
     description="{{ cookiecutter.project_short_description }}",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="{{ cookiecutter.repository_link }}",
+    url="https://www.github.com/{{ cookiecutter.user_name }}/{{ cookiecutter.project_slug }}",
     author="{{ cookiecutter.full_name }}",
     author_email="{{ cookiecutter.email }}",
     license="MIT",

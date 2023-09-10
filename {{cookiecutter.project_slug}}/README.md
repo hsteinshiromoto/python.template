@@ -31,3 +31,4 @@ $ poetry add {{cookiecutter.project_slug}}
 
 ## Usage
 
+This template is best suitable for Github-hosted repositories.
