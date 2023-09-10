@@ -19,12 +19,12 @@ docs_extras = [
 
 # This call to setup() does all the work
 setup(
-    name="python.template",
+    name="template.py",
     version="0.2.4",
     description="A cookiecutter template for Python projects",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/hsteinshiromoto/python.template",
+    url="https://github.com/hsteinshiromoto/template.py",
     author="Humberto STEIN SHIROMOTO",
     author_email="h.stein.shiromoto@gmail.com",
     license="MIT",
@@ -33,7 +33,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.11.1",
     ],
-    packages=["python.template"],
+    packages=["template.py"],
     include_package_data=True,
     extras_require={"docs": docs_extras},
 )

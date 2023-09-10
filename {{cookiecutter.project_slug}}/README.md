@@ -7,7 +7,7 @@
 
 {{cookiecutter.project_name}}
 
-This project was generated with [cookiecutter](https://github.com/audreyr/cookiecutter) using [hsteinshiromoto/python.template](https://github.com/hsteinshiromoto/python.template).
+This project was generated with [cookiecutter](https://github.com/audreyr/cookiecutter) using [hsteinshiromoto/template.py](https://github.com/hsteinshiromoto/template.py).
 
 ## Setup
 
